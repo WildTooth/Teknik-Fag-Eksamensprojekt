@@ -16,4 +16,13 @@ extern const int LIGHT_PIN_GREEN;
 extern const int LIGHT_PINS[];
 extern const int LIGHT_PIN_AMOUNT;
 
+extern const int BUTTON_PIN_UP;
+extern const int BUTTON_PIN_DOWN;
+extern const int BUTTON_PIN_LEFT;
+extern const int BUTTON_PIN_RIGHT;
+extern const int BUTTON_PIN_CENTER;
+
+extern const int BUTTON_PINS[];
+extern const int BUTTON_PIN_AMOUNT;
+
 #endif

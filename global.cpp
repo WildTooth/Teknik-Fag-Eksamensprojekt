@@ -1,5 +1,7 @@
 #include "global.h"
 
+// OUTPUTS
+
 const int LIGHT_PIN_YELLOW = 0;
 const int LIGHT_PIN_BLUE = 0;
 const int LIGHT_PIN_RED = 0;
@@ -7,3 +9,14 @@ const int LIGHT_PIN_GREEN = 0;
 
 const int LIGHT_PINS[] = {LIGHT_PIN_YELLOW, LIGHT_PIN_BLUE, LIGHT_PIN_RED, LIGHT_PIN_GREEN};
 const int LIGHT_PIN_AMOUNT = size(LIGHT_PINS);
+
+// INPUTS
+
+const int BUTTON_PIN_UP = 0;
+const int BUTTON_PIN_DOWN = 0;
+const int BUTTON_PIN_LEFT = 0;
+const int BUTTON_PIN_RIGHT = 0;
+const int BUTTON_PIN_CENTER = 0;
+
+const int BUTTON_PINS[] = {BUTTON_PIN_UP, BUTTON_PIN_DOWN, BUTTON_PIN_LEFT, BUTTON_PIN_RIGHT, BUTTON_PIN_CENTER};
+const int BUTTON_PIN_AMOUNT = size(BUTTON_PINS);
