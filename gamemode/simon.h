@@ -4,8 +4,6 @@
 #include "gamemode.h"
 #include "../global.h"
 
-#define YES_INPUT 6
-
 #define SPEED_FASTEST 250
 #define SPEED_VERY_FAST 500
 #define SPEED_FAST 750
@@ -16,31 +14,34 @@
 #define SPEED_SLOWEST 2000
 
 int randomPin() {
-  return random(0, LIGHT_PIN_AMOUNT);
+    return random(0, LIGHT_PIN_AMOUNT);
 }
 
-void doRound(int speed, int sequenceLength) {
-  for (int i = 0; i < sequenceLength; i++) {
-    int pin = LIGHT_PINS[randomPin()];
-    digitalWrite(pin, HIGH);
-    delay(speed);
-    digitalWrite(pin, LOW);
-    delay(SPEED_FASTEST);
-  }
-  delay(5000);
+void doRound(int speed, vector<int> sequence) {
+    sequence.push_back(LIGHT_PINS[randomPin()]);
+    for (int i = 0; i < sequence.size(); i++) {
+        int pin = sequence.at(i);
+        digitalWrite(pin, HIGH);
+        delay(speed);
+        digitalWrite(pin, LOW);
+        delay(SPEED_FASTEST);
+    }
 }
 
 class SimonSays : public Gamemode {
 public:
-    int count = 1;
+    vector<int> sequence = {};
 
     void init() override {
-        Gamemode::init();  // Call the base class init function
+        Gamemode::init();
+        if (!sequence.empty()) {
+            sequence.clear();
+        }
     }
     void run() override {
-      Gamemode::run();  // Call the base class run function
-      if (digitalRead(YES_INPUT) == HIGH) {
-          doRound(SPEED_VERY_FAST, count++);
+      Gamemode::run();
+      if (digitalRead(BUTTON_PIN_CENTER) == HIGH) {
+          doRound(SPEED_VERY_FAST, sequence);
       }
     }
 };
