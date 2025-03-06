@@ -6,14 +6,27 @@ Gamemode* obj;
 
 void setup() {
   Serial.begin(9600);
-  for (int i = 0; i < LIGHT_PIN_AMOUNT; i++) {
-    pinMode(LIGHT_PINS[i], OUTPUT);
-  }
-  pinMode(YES_INPUT, INPUT);
+  initializeInputs();
+  initializeOutputs();
+  
   obj = new SimonSays();
-  obj->init();  // Initialize the SimonSays object
+  obj->init();
 }
 
 void loop() {
-  obj->run();  // Continuously run the SimonSays game
+  obj->run();
+}
+
+void initializeInputs() {
+  for (int i = 0; i < BUTTON_PIN_AMOUNT; i++) {
+    pinMode(BUTTON_PINS[i], INPUT);
+  }
+  pinMode(MICROPHONE_PIN, INPUT);
+}
+
+void initializeOutputs() {
+  for (int i = 0; i < LIGHT_PIN_AMOUNT; i++) {
+    pinMode(LIGHT_PINS[i], OUTPUT);
+  }
+  pinMode(BUZZER_PIN, OUTPUT);
 }
