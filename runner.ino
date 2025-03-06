@@ -1,8 +1,13 @@
+#include "gamemodes/simon.h"
+
 void setup() {
-  // Run this!
   Serial.begin(9600);
+  SimonSays obj;
+  obj.init();
+  obj.run();
 }
 
 void loop() {
-  // Loopie Loop!
+
 }
+
