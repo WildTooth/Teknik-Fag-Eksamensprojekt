@@ -1,11 +1,13 @@
 int LED1 = 25;
 int LED2 = 26;
-int knap1=36;
+int knap1=33;
 int microfon =39;
 int buzzer=19;
 
-int speed = 400;
-byte rythem[8] = {0,0,0,0,0,0,0,0};
+int gamemode = 0;
+
+int speed = 100;
+byte rythem[32] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 void setup() {
   // put your setup code here, to run once:
@@ -20,12 +22,24 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+ OS();
 
 }
 
-void OS{
-  
+void OS() {
+  if (touchRead(knap1) < 36) {gamemode++;}
+  switch (gamemode%2){
+    case 0:
+    aimGame();
+    break;
+
+    case 1:
+    rythemGame();
+    break;
+
+    default:
+    break;
+  }
 }
 
 
@@ -48,23 +62,29 @@ void aimGame() {
 }
 
 void rythemGame() {
-  for (int i = 0;i<8;++i){
+for (int m = 0; m<2;m++){
+  for (int i = 0;i<32;++i){
     if (i == 0){ digitalWrite(LED2, HIGH); tone(buzzer,400);}
-    if ( i == 2 || i == 4 || i == 6){ digitalWrite(LED2, HIGH); tone(buzzer,600);}
+    if (i == 0 && m==0){ digitalWrite(LED2, HIGH); tone(buzzer,1600);}
+    if ( i == 8 || i == 16 || i == 24){ digitalWrite(LED2, HIGH); tone(buzzer,100);}
     if (rythem[i] == 1 ){
       digitalWrite(LED1, HIGH);
-      if (i == 2 || i == 4 || i == 6){ tone(buzzer,600); } else if(i == 0) {tone(buzzer,400);} else{ tone(buzzer,800); }
+      tone(buzzer,800);
 
-      for (int i = 0 ; i < speed; i++) {
-        if (speed/2<i){ noTone(buzzer); digitalWrite(LED1, LOW); digitalWrite(LED2, LOW);}
+      for (int n = 0 ; n < speed; n++) {
+        if (speed/2<n){ noTone(buzzer); digitalWrite(LED1, LOW); digitalWrite(LED2, LOW);}
+        if (digitalRead(microfon)==HIGH) {rythem[i]=1; digitalWrite(LED1,HIGH);} else {digitalWrite(LED1,LOW);}
         delay(1);
         }
     } else {
-      for (int i = 0 ; i < speed; i++) {
-        if (speed/2<i){ noTone(buzzer); digitalWrite(LED2, LOW);}
+      for (int n = 0 ; n < speed; n++) {
+        if (speed/2<n){ noTone(buzzer); digitalWrite(LED2, LOW);}
+        if (digitalRead(microfon)==HIGH) {rythem[i]=1; digitalWrite(LED1,HIGH);} else {digitalWrite(LED1,LOW);}
         delay(1);
         }
       }
+    }
+    if (m==1) {  for(int b = 0; b<32;++b){rythem[b]=0;}  }
   }
 }
 
@@ -83,6 +103,7 @@ void SFX(int index){
     delay(400);
     noTone(buzzer);
     break;
+
     case 1: //lose
     tone(buzzer,261);
     delay(200);
