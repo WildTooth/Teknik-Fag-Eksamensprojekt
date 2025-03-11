@@ -69,7 +69,9 @@ public:
     void init() override {
         Gamemode::init();
         speed = 100;
-        rythm = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        for (int i = 0; i < size(rythm); i++) {
+          rythm[i] = 0;
+        }
     }
 
     void run() override {

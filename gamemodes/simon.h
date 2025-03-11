@@ -4,6 +4,9 @@
 #include "gamemode.h"
 #include "../global.h"
 
+#include <ArduinoSTL.h>
+#include <vector>
+
 #define SPEED_FASTEST 250
 #define SPEED_VERY_FAST 500
 #define SPEED_FAST 750
@@ -17,7 +20,7 @@ int randomPin() {
     return random(0, LIGHT_PIN_AMOUNT);
 }
 
-void doRound(int speed, vector<int> sequence) {
+void doRound(int speed, std::vector<int> sequence) {
     sequence.push_back(LIGHT_PINS[randomPin()]);
     for (int i = 0; i < sequence.size(); i++) {
         int pin = sequence.at(i);
@@ -30,7 +33,7 @@ void doRound(int speed, vector<int> sequence) {
 
 class SimonSays : public Gamemode {
 public:
-    vector<int> sequence = {};
+    std::vector<int> sequence = {};
 
     void init() override {
         Gamemode::init();

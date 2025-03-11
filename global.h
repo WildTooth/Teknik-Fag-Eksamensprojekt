@@ -2,6 +2,7 @@
 #define GLOBAL_H
 
 #include <stddef.h> // Arduinos definitioner, vi skal bruge dette import for at kunne bruge typen "size_t"
+#include <Arduino.h> // Så vi får funktioner så som random
 
 template <typename T, size_t N>
 constexpr int size(T (&array)[N]) {
@@ -12,25 +13,27 @@ long randomInclusive(long min, long max) {
   return random(min, max + 1);
 }
 
-extern const int LIGHT_PIN_YELLOW;
-extern const int LIGHT_PIN_BLUE;
-extern const int LIGHT_PIN_RED;
-extern const int LIGHT_PIN_GREEN;
+const int LIGHT_PIN_YELLOW = 0;
+const int LIGHT_PIN_BLUE = 0;
+const int LIGHT_PIN_RED = 0;
+const int LIGHT_PIN_GREEN = 0;
 
-extern const int LIGHT_PINS[];
-extern const int LIGHT_PIN_AMOUNT;
+const int LIGHT_PINS[] = {LIGHT_PIN_YELLOW, LIGHT_PIN_BLUE, LIGHT_PIN_RED, LIGHT_PIN_GREEN};
+const int LIGHT_PIN_AMOUNT = size(LIGHT_PINS);
 
-extern const int BUZZER_PIN;
+const int BUZZER_PIN = 0;
 
-extern const int BUTTON_PIN_UP;
-extern const int BUTTON_PIN_DOWN;
-extern const int BUTTON_PIN_LEFT;
-extern const int BUTTON_PIN_RIGHT;
-extern const int BUTTON_PIN_CENTER;
+// INPUTS
 
-extern const int BUTTON_PINS[];
-extern const int BUTTON_PIN_AMOUNT;
+const int BUTTON_PIN_UP = 0;
+const int BUTTON_PIN_DOWN = 10;
+const int BUTTON_PIN_LEFT = 20;
+const int BUTTON_PIN_RIGHT = 30;
+const int BUTTON_PIN_CENTER = 40;
 
-extern const int MICROPHONE_PIN;
+const int BUTTON_PINS[] = {BUTTON_PIN_UP, BUTTON_PIN_DOWN, BUTTON_PIN_LEFT, BUTTON_PIN_RIGHT, BUTTON_PIN_CENTER};
+const int BUTTON_PIN_AMOUNT = size(BUTTON_PINS);
+
+const int MICROPHONE_PIN = 0;
 
 #endif
