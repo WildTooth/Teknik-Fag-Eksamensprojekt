@@ -4,7 +4,6 @@
 #include "gamemode.h"
 #include "../global.h"
 
-#include <ArduinoSTL.h>
 #include <vector>
 
 #define SPEED_FASTEST 250
