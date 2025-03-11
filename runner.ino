@@ -22,18 +22,19 @@ void loop() {
   obj->run();
 }
 
+int currentButtonPin = -69;
+
 int isPressingGameButton() {
-  if (digitalRead(BUTTON_PIN_UP) == HIGH) {
-    return BUTTON_PIN_UP;
-  } else if (digitalRead(BUTTON_PIN_DOWN) == HIGH) {
-    return BUTTON_PIN_DOWN;
-  } else if (digitalRead(BUTTON_PIN_LEFT) == HIGH) {
-    return BUTTON_PIN_LEFT;
-  } else if (digitalRead(BUTTON_PIN_RIGHT) == HIGH) {
-    return BUTTON_PIN_RIGHT;
-  } else {
-    return -1;
+  for (int i = 0; i < BUTTON_PIN_AMOUNT; i++) {
+    currentButtonPin = BUTTON_PINS[i];
+    if (currentButtonPin == BUTTON_PIN_CENTER) {
+      continue;
+    }
+    if (digitalRead(currentButtonPin) == HIGH) {
+      return currentButtonPin;
+    }
   }
+  return -1;
 }
 
 void switchGamemode(int gamemode) {
