@@ -9,7 +9,7 @@ int gamemodeSelect = -1;
 int savedGamemode = -1;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   initializeInputs();
   initializeOutputs();
 }
