@@ -33,32 +33,33 @@ void playLosingSound() {
 }
 
 void doRound() {
-    digitalWrite(LIGHT_PIN_RED, LOW);
+    digitalWrite(LIGHT_PIN_BLUE, LOW);
     int throwPause = randomInclusive(1000, 5000);
     int throwWindow = randomInclusive(3000, 6000);
 
     for (int i = 0; i < throwPause; i++) {
         if (digitalRead(MICROPHONE_PIN) == HIGH) {
             playLosingSound();
-            delay(1);
         }
+        delay(1);
     }
 
     long startEpoch = millis();
     while (millis() - startEpoch < throwWindow) {
         if ((millis() - startEpoch) % 100 == 1) {
-            digitalWrite(LIGHT_PIN_RED, HIGH);
+            digitalWrite(LIGHT_PIN_BLUE, HIGH);
         } else if ((millis() - startEpoch) % 100 == 50) {
-            digitalWrite(LIGHT_PIN_RED, LOW);
+            digitalWrite(LIGHT_PIN_BLUE, LOW);
         }
         if (digitalRead(MICROPHONE_PIN) == HIGH) {
-            digitalWrite(LIGHT_PIN_BLUE, HIGH);
+            digitalWrite(LIGHT_PIN_RED, HIGH);
             playWinningSound();
             delay(500);
-            digitalWrite(LIGHT_PIN_BLUE,LOW);
+            digitalWrite(LIGHT_PIN_RED,LOW);
             break;
         }
     }
+    
 }
 
 class AimGame : public Gamemode {
