@@ -20,7 +20,6 @@ int randomPin() {
 }
 
 void doRound(int speed, std::vector<int> sequence) {
-    sequence.push_back(LIGHT_PINS[randomPin()]);
     for (int i = 0; i < sequence.size(); i++) {
         int pin = sequence.at(i);
         digitalWrite(pin, HIGH);
@@ -43,6 +42,7 @@ public:
     void run() override {
       Gamemode::run();
       if (digitalRead(BUTTON_PIN_CENTER) == HIGH) {
+          sequence.push_back(LIGHT_PINS[randomPin()]);
           doRound(SPEED_VERY_FAST, sequence);
       }
     }
