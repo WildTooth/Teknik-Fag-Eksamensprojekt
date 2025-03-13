@@ -5,6 +5,7 @@
 #include "../global.h"
 
 #include <vector>
+#include <string>
 
 #define SPEED_FASTEST 250
 #define SPEED_VERY_FAST 500
@@ -19,33 +20,46 @@ int randomPin() {
     return random(0, LIGHT_PIN_AMOUNT);
 }
 
-void doRound(int speed, std::vector<int> sequence) {
+class SimonSays : public Gamemode {
+public:
+    int speed = 0;
+    std::vector<int> sequence = {};
+
+    void init() override {
+        Gamemode::init();
+        speed = SPEED_VERY_FAST;
+        if (!sequence.empty()) {
+            sequence.clear();
+        }
+    }
+    
+    void run() override {
+      Gamemode::run();
+      if (digitalRead(BUTTON_PIN_CENTER) == HIGH) {
+          sequence.push_back(LIGHT_PINS[randomPin()]);
+          doRound();
+      }
+    }
+
+    void stop() override {
+      Gamemode::stop();
+    }
+
+protected:
+  void doRound() override {
     for (int i = 0; i < sequence.size(); i++) {
+        if (Gamemode::shouldStop()) {
+          stop();
+          return;
+        }
         int pin = sequence.at(i);
         digitalWrite(pin, HIGH);
         delay(speed);
         digitalWrite(pin, LOW);
         delay(SPEED_FASTEST);
     }
-}
-
-class SimonSays : public Gamemode {
-public:
-    std::vector<int> sequence = {};
-
-    void init() override {
-        Gamemode::init();
-        if (!sequence.empty()) {
-            sequence.clear();
-        }
-    }
-    void run() override {
-      Gamemode::run();
-      if (digitalRead(BUTTON_PIN_CENTER) == HIGH) {
-          sequence.push_back(LIGHT_PINS[randomPin()]);
-          doRound(SPEED_VERY_FAST, sequence);
-      }
-    }
+    stop();
+  }
 };
 
 #endif

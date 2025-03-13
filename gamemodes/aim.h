@@ -32,12 +32,34 @@ void playLosingSound() {
     noTone(BUZZER_PIN);
 }
 
-void doRound() {
+class AimGame : public Gamemode {
+public:
+
+    void init() override {
+        Gamemode::init();
+    }
+
+    void run() override {
+        Gamemode::run();
+        doRound();
+    }
+
+    void stop() override {
+        Gamemode::stop();
+    }
+
+protected:
+
+  void doRound() override {
     digitalWrite(LIGHT_PIN_BLUE, LOW);
     int throwPause = randomInclusive(1000, 5000);
     int throwWindow = randomInclusive(3000, 6000);
 
     for (int i = 0; i < throwPause; i++) {
+        if (Gamemode::shouldStop()) {
+            stop();
+            return;
+        }
         if (digitalRead(MICROPHONE_PIN) == HIGH) {
             playLosingSound();
         }
@@ -46,6 +68,10 @@ void doRound() {
 
     long startEpoch = millis();
     while (millis() - startEpoch < throwWindow) {
+        if (Gamemode::shouldStop()) {
+            stop();
+            return;
+        }
         if ((millis() - startEpoch) % 100 == 1) {
             digitalWrite(LIGHT_PIN_BLUE, HIGH);
         } else if ((millis() - startEpoch) % 100 == 50) {
@@ -59,19 +85,8 @@ void doRound() {
             break;
         }
     }
-    
-}
-
-class AimGame : public Gamemode {
-public:
-
-    void init() override {
-        Gamemode::init();
-    }
-    void run() override {
-        Gamemode::run();
-        doRound();
-    }
+    stop();
+  }
 };
 
 #endif
