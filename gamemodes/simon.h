@@ -5,7 +5,6 @@
 #include "../global.h"
 
 #include <vector>
-#include <string>
 
 #define SPEED_FASTEST 250
 #define SPEED_VERY_FAST 500
@@ -18,6 +17,23 @@
 
 int randomPin() {
     return random(0, LIGHT_PIN_AMOUNT);
+}
+
+void playMatchingSound(int pin, int speed) {
+  switch(pin) {
+    case LIGHT_PIN_YELLOW:
+      tone(BUZZER_PIN, 987, speed);
+      break;
+    case LIGHT_PIN_BLUE:
+      tone(BUZZER_PIN, 220, speed);
+      break;
+    case LIGHT_PIN_RED:
+      tone(BUZZER_PIN, 415, speed);
+      break;
+    case LIGHT_PIN_GREEN:
+      tone(BUZZER_PIN, 659, speed);
+      break;
+  }
 }
 
 class SimonSays : public Gamemode {
@@ -54,9 +70,10 @@ protected:
         }
         int pin = sequence.at(i);
         digitalWrite(pin, HIGH);
+        playMatchingSound(pin, speed);
         delay(speed);
         digitalWrite(pin, LOW);
-        delay(SPEED_FASTEST);
+        delay(SPEED_FAST);
     }
     stop();
   }
