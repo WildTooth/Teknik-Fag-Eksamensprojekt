@@ -18,6 +18,11 @@ void loop() {
   gamemodeSelect = isPressingGameButton();
   if (gamemodeSelect != -1) {
     switchGamemode(gamemodeSelect);
+    obj->init();
+    gamemodeSelect = -1;
+  }
+  if (savedGamemode == -1) {
+    return;
   }
   obj->run();
 }
@@ -42,17 +47,25 @@ void switchGamemode(int gamemode) {
     case BUTTON_PIN_UP:
       obj = new SimonSays();
       savedGamemode = 0;
+      Serial.println("SIMONNNNN!");
+      break;
     case BUTTON_PIN_DOWN:
       obj = new AimGame();
       savedGamemode = 1;
+      Serial.println("Sigte!!");
+      break;
     case BUTTON_PIN_LEFT:
       obj = new RythmGame();
       savedGamemode = 2;
+      Serial.println("Rytme!");
+      break;
     case BUTTON_PIN_RIGHT:
       obj = new SimonSays();
       savedGamemode = 3;
+      Serial.println("Simon Says!");
+      break;
     default:
-      obj -> init();
+      return;
   }
 }
 
