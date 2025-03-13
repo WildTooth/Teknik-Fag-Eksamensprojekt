@@ -48,21 +48,25 @@ void switchGamemode(int gamemode) {
       obj = new SimonSays();
       savedGamemode = 0;
       Serial.println("SIMONNNNN!");
+      delay(500);
       break;
     case BUTTON_PIN_DOWN:
       obj = new AimGame();
       savedGamemode = 1;
       Serial.println("Sigte!!");
+      delay(500);
       break;
     case BUTTON_PIN_LEFT:
       obj = new RythmGame();
       savedGamemode = 2;
       Serial.println("Rytme!");
+      delay(500);
       break;
     case BUTTON_PIN_RIGHT:
       obj = new SimonSays();
       savedGamemode = 3;
       Serial.println("Simon Says!");
+      delay(500);
       break;
     default:
       return;
