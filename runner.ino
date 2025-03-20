@@ -4,8 +4,21 @@
 #include "gamemodes/rythm.h"
 #include "global.h"
 
+/**
+ * Gamemode Objektet hvor der kan benyttes polymorphism til at skifte mellem de forskellige gamemodes.
+ */
 Gamemode* obj;
+
+/**
+ * En integer der beskriver hvorvidt at brugeren er i gang med at skifte spil.
+ * Hvis denne er -1 betyder det at der ikke er ved at blive valgt et nyt spil.
+ */
 int gamemodeSelect = -1;
+
+/**
+ * Denne integer beskriver hvorvidt at der er valgt et spil.
+ * Hvis denne er -1 betyder det at der ikke er valgt et spil.
+ */
 int savedGamemode = -1;
 
 void setup() {
@@ -27,8 +40,19 @@ void loop() {
   obj->run();
 }
 
+/**
+ * Den fundne knap der bliver benyttet i momentet.
+ */
+ // Her sættes den til -69, bare fordi.
 int currentButtonPin = -69;
 
+/**
+ * Tjekker for om der bliver holdt en knap nede, dette kunne godt have været en booleansk funktion,
+ * men vi har valgt at lade den returnere en integer i stedet da vi på den måde kan få mere detaljeret information
+ * ud af returneringen.
+ * 
+ * @return en integer som fortæller hvilken knap der bliver trykket på, hvis ingen bliver trykket på returneres -1
+ */
 int isPressingGameButton() {
   for (int i = 0; i < BUTTON_PIN_AMOUNT; i++) {
     currentButtonPin = BUTTON_PINS[i];
@@ -42,6 +66,10 @@ int isPressingGameButton() {
   return -1;
 }
 
+/**
+ * En simpel funktion til at håndtere skift mellem de forskellige spiltilstande
+ * @param gamemode en integer svarende til den knap der er blevet trykket på.
+ */
 void switchGamemode(int gamemode) {
   switch(gamemode) {
     case BUTTON_PIN_UP:

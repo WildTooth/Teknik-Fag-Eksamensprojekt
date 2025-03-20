@@ -7,7 +7,14 @@
 class RythmGame : public Gamemode {
 public:
 
+    /**
+     * Beskriver rytmehastigheden
+     */
     int speed = 100;
+
+    /**
+     * Et array der representere en rytme
+     */
     byte rythm[32] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
     void init() override {

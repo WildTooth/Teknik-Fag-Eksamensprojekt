@@ -4,6 +4,9 @@
 #include "gamemode.h"
 #include "../global.h"
 
+/**
+ * Spiller en melodi, denne melodi er en positiv vinder-melodi
+ */
 void playWinningSound() {
     tone(BUZZER_PIN,261);
     delay(100);
@@ -18,6 +21,9 @@ void playWinningSound() {
     noTone(BUZZER_PIN);
 }
 
+/**
+ * Spiller en melodi, denne melodi er en negativ "taber"-melodi
+ */
 void playLosingSound() {
     tone(BUZZER_PIN,261);
     delay(200);

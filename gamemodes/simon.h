@@ -15,23 +15,32 @@
 #define SPEED_VERY_SLOW 1750
 #define SPEED_SLOWEST 2000
 
+/**
+ * Funktion der returnere værdien på et tilfældigt LED-pin.
+ * @return tilfædlig LED-pin værdi.
+ */
 int randomPin() {
     return random(0, LIGHT_PIN_AMOUNT);
 }
 
-void playMatchingSound(int pin, int speed) {
+/**
+ * Funktion der spiller en lyd baseret på farven af pin der er valgt
+ * @param pin en integer repræsentation af det valgte pin
+ * @param speed hvor lang tid tonen skal afspilles
+ */
+void playMatchingSound(int pin, int duration) {
   switch(pin) {
     case LIGHT_PIN_YELLOW:
-      tone(BUZZER_PIN, 987, speed);
+      tone(BUZZER_PIN, 987, duration);
       break;
     case LIGHT_PIN_BLUE:
-      tone(BUZZER_PIN, 220, speed);
+      tone(BUZZER_PIN, 220, duration);
       break;
     case LIGHT_PIN_RED:
-      tone(BUZZER_PIN, 415, speed);
+      tone(BUZZER_PIN, 415, duration);
       break;
     case LIGHT_PIN_GREEN:
-      tone(BUZZER_PIN, 659, speed);
+      tone(BUZZER_PIN, 659, duration);
       break;
   }
 }

@@ -4,11 +4,22 @@
 #include <stddef.h> // Arduinos definitioner, vi skal bruge dette import for at kunne bruge typen "size_t"
 #include <Arduino.h> // Så vi får funktioner så som random
 
+/**
+ * Simpel funktion der returnere størrelsen på et array.
+ * @param array det array hvor størrelsen skal findes.
+ * @return en integer svarende til størrelsen af arrayet.
+ */
 template <typename T, size_t N>
 constexpr int size(T (&array)[N]) {
   return N;
 }
 
+/**
+ * En utility funktion hvor at den øvre bound til #random(long, long), også tages med som en tilfædlig mulighed.
+ * @param min en long som beskriver minimumsværdien for det tilfældige tal
+ * @param max en long som beskriver maximumsværdien for det tilfældige tal
+ * @return et tilfældigt tal indenfor intervallet
+ */
 long randomInclusive(long min, long max) {
   return random(min, max + 1);
 }
