@@ -32,13 +32,25 @@ const int LIGHT_PIN_GREEN = 21;
 const int LIGHT_PINS[] = {LIGHT_PIN_YELLOW, LIGHT_PIN_BLUE, LIGHT_PIN_RED, LIGHT_PIN_GREEN};
 const int LIGHT_PIN_AMOUNT = size(LIGHT_PINS);
 
-const int BUZZER_PIN = 16;
+/**
+ * @deprecated til fordel for SPEAKER_PIN
+ *
+ * Fjern brugen af BUZZER_PIN, vi benytter i stedet en reel højtaler der tillader afspilning
+ * af lydfiler opbevaret på ESP'en.
+ * 
+ * @see SPEAKER_PIN
+ */
+const int BUZZER_PIN = 12;
+
+const int SPEAKER_PIN = 25;
+
+
 
 // INPUTS
 
-const int BUTTON_PIN_UP = 25;
+const int BUTTON_PIN_UP = 18;
 const int BUTTON_PIN_DOWN = 5;
-const int BUTTON_PIN_LEFT = 18;
+const int BUTTON_PIN_LEFT = 16;
 const int BUTTON_PIN_RIGHT = 27;
 const int BUTTON_PIN_CENTER = 26;
 
