@@ -44,7 +44,7 @@ protected:
         if (BUTTON_PINS[i] == BUTTON_PIN_CENTER) {
           continue;
         }
-        shouldStop = (digitalRead(BUTTON_PINS[i]) == HIGH);
+        shouldStop = (digitalRead(BUTTON_PINS[i]) == LOW);
         if (shouldStop) {
           return true;
         }

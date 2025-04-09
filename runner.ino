@@ -2,10 +2,13 @@
 #include "gamemodes/simon.h"
 #include "gamemodes/aim.h"
 #include "gamemodes/rythm.h"
+#include "gamemodes/demo.h"
 #include "global.h"
+#include "audio.h"
 
 /**
- * Gamemode Objektet hvor der kan benyttes polymorphism til at skifte mellem de forskellige gamemodes.
+ * Gamemode Objektet hvor der kan benyttes polymorphism
+ * til at skifte mellem de forskellige gamemodes.
  */
 Gamemode* obj;
 
@@ -25,6 +28,8 @@ void setup() {
   Serial.begin(115200);
   initializeInputs();
   initializeOutputs();
+  audioInitialize();
+  playSound("/Force.dat", 22000);
 }
 
 void loop() {
@@ -59,7 +64,7 @@ int isPressingGameButton() {
     if (currentButtonPin == BUTTON_PIN_CENTER) {
       continue;
     }
-    if (digitalRead(currentButtonPin) == HIGH) {
+    if (digitalRead(currentButtonPin) == LOW) {
       return currentButtonPin;
     }
   }
@@ -91,9 +96,9 @@ void switchGamemode(int gamemode) {
       delay(500);
       break;
     case BUTTON_PIN_RIGHT:
-      obj = new SimonSays();
+      obj = new DemoGame();
       savedGamemode = 3;
-      Serial.println("Simon Says!");
+      Serial.println("DEMO!");
       delay(500);
       break;
     default:
@@ -113,4 +118,5 @@ void initializeOutputs() {
     pinMode(LIGHT_PINS[i], OUTPUT);
   }
   pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(SPEAKER_PIN, OUTPUT);
 }

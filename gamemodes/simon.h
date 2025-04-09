@@ -27,6 +27,7 @@ int randomPin() {
  * Funktion der spiller en lyd baseret på farven af pin der er valgt
  * @param pin en integer repræsentation af det valgte pin
  * @param speed hvor lang tid tonen skal afspilles
+ * @see https://www.szynalski.com/tone-generator/ - Her kan tonerne testes
  */
 void playMatchingSound(int pin, int duration) {
   switch(pin) {
@@ -60,7 +61,7 @@ public:
     
     void run() override {
       Gamemode::run();
-      if (digitalRead(BUTTON_PIN_CENTER) == HIGH) {
+      if (digitalRead(BUTTON_PIN_CENTER) == LOW) {
           sequence.push_back(LIGHT_PINS[randomPin()]);
           doRound();
       }
