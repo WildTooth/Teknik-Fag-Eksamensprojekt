@@ -3,7 +3,6 @@
 
 #include "gamemode.h"
 #include "../global.h"
-#include "../audio.h"
 
 /**
  * Funktion der spiller en lyd baseret på farven af pin der er valgt
