@@ -27,7 +27,6 @@ void setup() {
   Serial.begin(115200);
   initializeInputs();
   initializeOutputs();
-  audioInitialize();
   digitalWrite(LIGHT_PIN_YELLOW,HIGH);
   digitalWrite(LIGHT_PIN_RED,HIGH);
   digitalWrite(LIGHT_PIN_BLUE,HIGH);
