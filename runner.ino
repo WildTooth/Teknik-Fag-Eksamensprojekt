@@ -29,15 +29,15 @@ void setup() {
   initializeInputs();
   initializeOutputs();
   audioInitialize();
-  for (int i = 0; i < LIGHT_PIN_AMOUNT; i++) {
-    digitalWrite(LIGHT_PINS[i], HIGH);
-    delay(50);
-  }
+  digitalWrite(LIGHT_PIN_YELLOW,HIGH);
+  digitalWrite(LIGHT_PIN_RED,HIGH);
+  digitalWrite(LIGHT_PIN_BLUE,HIGH);
+  digitalWrite(LIGHT_PIN_GREEN,HIGH);
   delay(800);
-  for (int i = 0; i < LIGHT_PIN_AMOUNT; i++) {
-    digitalWrite(LIGHT_PINS[i], LOW);
-    delay(50);
-  }
+  digitalWrite(LIGHT_PIN_YELLOW,LOW);
+  digitalWrite(LIGHT_PIN_RED,LOW);
+  digitalWrite(LIGHT_PIN_BLUE,LOW);
+  digitalWrite(LIGHT_PIN_GREEN,LOW);
 }
 
 void loop() {
