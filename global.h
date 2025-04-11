@@ -40,7 +40,7 @@ const int LIGHT_PIN_AMOUNT = size(LIGHT_PINS);
  * 
  * @see SPEAKER_PIN
  */
-const int BUZZER_PIN = 12;
+const int BUZZER_PIN = 25;
 
 const int SPEAKER_PIN = 25;
 
